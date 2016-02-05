@@ -62,6 +62,7 @@ class Grape::Middleware::Logger < Grape::Middleware::Globals
   end
 
   def after(status)
+    logger.info "Response for #{env[Grape::Env::GRAPE_REQUEST].path} with parameters #{parameters} is #{@app_response.to_json}"
     logger.info "Completed #{status} in #{((Time.now - start_time) * 1000).round(2)}ms"
     logger.info ''
   end
